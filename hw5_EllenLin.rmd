@@ -1,0 +1,106 @@
+---
+title: "homework5"
+author: "Ellen Lin"
+date: "Friday, March 11th, 2016"
+output: html_document
+---
+
+####Q1.a) What is p-value? How to interpret it?
+p-value is a function of the observed sample results (a test statistic) relative to a statistical model, which measures how extreme the observation is. If the p-value is less than or equal to the chosen significance level (α), the test suggests that the observed data are inconsistent with the null hypothesis, so the null hypothesis must be rejected. 
+
+####Q1.b) What is the difference between one-tailed and two-tailed test?
+When our null hypothesis is that the mean is equal to x. A two-tailed test will test both if the mean is significantly greater than x and if the mean significantly less than x； a one-tailed test allots all of your alpha to testing the statistical significance in the one direction of interest. 
+
+####Q2) When looking at the table of coefficients for models it lists . , \*, \*\*, or \*\*\* next to the P-values. What do these 'Stars' signify?
+
+Signif. codes:  0 '\*\*\*' 0.001 '\*\*' 0.01 ‘\*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+The smaller p-value is, the more '\*\*\*' it has, and more significant this independent variable is to the dependant variable.
+
+####Q3.a) In the context of regression analysis, which of the following statements are true?
+I. When the data set includes an influential point, the data set is nonlinear. 
+
+II. Influential points always reduce the coefficient of determination. 
+
+III. All outliers are influential data points. 
+
+#####Ans: (E) None of the above
+
+####Q3.b) In the context of regression analysis , which of the following statements are true?
+I. A linear transformation increases the linear relationship between variables.
+
+II. A logarithmic model is the most effective transformation method to achieve linearity. 
+
+III. A residual plot reveals departures from linearity.
+
+#####Ans:(C) III only
+
+####Q3.c) A researcher uses a regression equation to predict home heating bills (dollar cost), based on home size (square feet). The correlation between predicted bills and home size is 0.70. What is the correct interpretation of this finding?
+
+#####Ans: B
+(A) 70% of the variability in home heating bills can be explained by home size.
+(B) 49% of the variability in home heating bills can be explained by
+home size.
+(C) For each added square foot of home size, heating bills increased by 70 cents.
+(D) For each added square foot of home size, heating bills increased by 49 cents.
+(E) None of the above.
+
+####Q3.d) In the context of regression analysis, which of the following statements are true?
+
+#####Ans: B
+I. When the sum of the residuals is greater than zero, the data set is nonlinear.
+
+II. A random pattern of residuals supports a linear model.
+
+III. A random pattern of residuals supports a non-linear model.
+
+(A) I only (B) II only (C) III only (D) I and II (E) I and III
+
+####Q4) In hypothesis testing, which of the following statements is always true?
+I. The P-value is greater than the significance level. 
+II. The P-value is computed from the significance level. 
+III. The P-value is the parameter in the null hypothesis. 
+IV. The P-value is a test statistic.
+V. The P-value is a probability.
+
+#####Ans: E
+(A) I only (B) II only (C) III only (D) IV only (E) V only
+
+####Q5) A national consumer magazine reported the following correlations.
+The correlation between car weight and car reliability is -0.30. The correlation between car weight and annual maintenance cost is 0.20.
+Which of the following statements are true?
+I. Heavier cars tend to be less reliable.
+II. Heavier cars tend to cost more to maintain.
+III. Car weight is related more strongly to reliability than to maintenance cost.
+
+#####Ans: E
+(A) I only 
+(B) II only 
+(C) III only
+(D) I and II only 
+(E) I, II, and III
+
+####Q6) The local utility company surveys 101 randomly selected customers. For each survey participant, the company collects the following: annual electric bill (in dollars) and home size (in square feet). Output from a regression analysis appears below.
+
+![](fig1.PNG)
+
+Is there a significant linear relationship between annual bill and home size? Use a 0.01 level of significance.
+
+degree of freedom = 101 - 2 = 99 
+t = coeficient/SE Coef = 0.55/0.24 = 2.29
+Based on the t-score test statistic and the degrees of freedom, we determine the P-value. The P-value is the probability that a t-score having 99 degrees of freedom is more extreme than 2.29. Since this is a two-tailed test, which means greater than 2.29 or less than -2.29. We use the t Distribution Calculator to find P(t > 2.29) = 0.0121 and P(t < 2.29) = 0.0121. Therefore, the P-value is 0.0121*2 = 0.0242.
+
+####Q7) What is two sample t-test?
+The two-sample t-test is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
+
+####Q8) A US court considers two possible claims about a defen- dant: she is either innocent or guilty. If we set these claims up in a hypothesis framework, which would be the null hypothesis and which the alternative?
+null hypothesis is that the person is innocent.
+alternative hypothesis is that the pereson is quilty(not innocent).
+
+####Q9) What is a test-statistic (also give example)?
+A test statistic is a standardized value that is calculated from sample data during a hypothesis test. For example, you can use z test statistics to determine whether to reject the null hypothesis. The z test compares your data with what is expected under the null hypothesis. The z test is used to calculate the p-value. Suppose you perform a two-tailed Z-test with an α of 0.05, and obtain a Z-statistic based on your data of 2.5. This Z-value corresponds to a p-value of 0.0124. Because this p-value is less than α, you declare statistical significance and reject the null hypothesis.
+
+####Q10) Give three examples where association between variables does not mean causation is involved.
+Statistically, poor income family have a higher chance to live in dangerous neighborhoods. But it doesn't mean the poverty cause people to commit crime. 
+Second, Palo Alto has the higheast highschool students suicide rate across the country, Palo Alto is one of the richest neighborhood in the U.S. This could mean  kids from a wealthy family are more likely to commit suicide, but it doesn't mean that wealth causes teenages to commit suicide.
+Third, during WW2, women have higher employement rate; but that didn't mean the war  made women have more equality at workplace. (it could be men attending wars caused there were more job openings for women)
+
