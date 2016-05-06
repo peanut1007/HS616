@@ -1,0 +1,53 @@
+---
+title: "Data Simulation Demo"
+author: "Ellen Lin"
+date: "May 5, 2016"
+output: html_document
+---
+2 pts) Wednesday, May 4th:
+
+1.	Upload a file that contains a link to the research article that is the basis for your project. Alternatively, you may write a paragraph explaining your simulation idea, listing what condition you are investigating and which variables you will simulate.
+
+http://download.springer.com/static/pdf/436/art%253A10.1023%252FA%253A1020378022303.pdf?originUrl=http%3A%2F%2Flink.springer.com%2Farticle%2F10.1023%2FA%3A1020378022303&token2=exp=1462327772~acl=%2Fstatic%2Fpdf%2F436%2Fart%25253A10.1023%25252FA%25253A1020378022303.pdf%3ForiginUrl%3Dhttp%253A%252F%252Flink.springer.com%252Farticle%252F10.1023%252FA%253A1020378022303*~hmac=958eafba16a704dbdb07f303ae2c86bf44fe721ae416f0f6d7a37917885aa8a1
+
+This article talks about how to simulate data and use data modeling to see the progress of patients who have had a coronary event, through their treatment pathways and subsequent coronary events. The main risk factors in the model are age, sex, history of previous events and the extent of the coronary vessel disease. 
+
+
+2.	In the comment box of your Canvas submission include two pieces of information:
+
+a)	Indicate if you will use github for Code Camp Points. If so, then provide the link to the github repo that you will use for this project:
+https://github.com/peanut1007/HS616
+
+b)	Indicate the format in which you will create your final report. Your format must permit you to provide code and plots along with text explaining your project, your analysis and your conclusions. Formats such as Word, html, and pdf allow this. (R markdown may output any of these formats for Code Camp points)
+#####I will be using R mark down or mark down file on github to present my code. 
+
+
+
+
+```{r}
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
