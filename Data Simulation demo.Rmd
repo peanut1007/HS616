@@ -21,6 +21,31 @@ https://github.com/peanut1007/HS616
 b)	Indicate the format in which you will create your final report. Your format must permit you to provide code and plots along with text explaining your project, your analysis and your conclusions. Formats such as Word, html, and pdf allow this. (R markdown may output any of these formats for Code Camp points)
 #####I will be using R mark down or mark down file on github to present my code. 
 
+(8 pts):
+a)	What condition or relationships are you investigating?
+I investigated to see the pattern of people having their angina related to their age and gender. 
+
+b)	Give the dimensions of the data set(s) you are simulating (number of rows, number of columns)
+I generated two datasets, each dataset presents different sex, and it contains 1000 rows of people; 2 columns, one has the classifier code of what symptoms he or she gets, the other one has the age of the first incidence happens.
+
+
+c)	List your predictor variables: their types (including factor levels if there are any), information such as their distributions, whether there will be correlated or confounding variables, whether there will be missing data.
+Predictor variable are the probabilities of each of the incidence happening at age band per year. And these probabilities are different for male and female. There is not distribution in this attribute but once I simulate the data, the results will have patterns and distributions.
+
+d)	List your response variable(s):  type(s) (including factor levels if there are any), information such as distribution and relation to correlated or confounding predictor variables.
+My response variable are : 1. Age (numbers integers) of first symptoms happening, and 2. classification of incidence (factors: stable angina, unstable angina and myocardial infarction). I used Shapiro test to find that age for each incidence are not normally distributed, and correlations of age to incidence type is low, which shows 0.245 for male, and 0.16 for female respectively. 
+
+e)	List steps you plan to take in simulating the data
+1.	Generate % of each incidence at each age band per year.
+2.	Age starts at 45, generate a random number from 0 to 1 (each year)
+3.	Each time when a random number generated, compare it to each of the probability of incidence happens. The algorithm acts as generating a compare to a1, if not happen generating b compare to b1, if not happen generating c compare to c1. 
+4.	If none of the incidence happened, add another year. And going through steps 3 again. Remember, when the age goes up, the probability of incidence changes at each age band.
+5.	In the end, either the variable – incidence type gets assigned, or the Age goes up to 85, then the loop stops.
+
+f)	List steps you plan to take in analyzing the data. 
+1.	Calculate the percentage people out of 1000 samples survive. 
+2.	Shapiro test to see normality.
+3.	Use t test to compare male of female’s mean of age of first incidence of “stable angina” happen.
 
 
 
