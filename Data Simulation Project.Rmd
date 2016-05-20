@@ -98,7 +98,7 @@ L1 <-melt(occurance1)
 all_male <- list(s_vector,u_vector,m_vector, healthy_vector)
 all1 <-melt(all_male)
 survive1 = length(healthy_vector)/10000
-#64.4% male health till 85 years old.
+# about 63.3% male health till 85 years old.
 survive1
 1-survive1
 
@@ -125,7 +125,7 @@ L2 <-melt(occurance2)
 all_female <- list(s_vector,u_vector,m_vector, healthy_vector)
 all2 <-melt(all_female)
 survive2 = length(healthy_vector)/10000
-#77% female health till 85 years old.
+# about 78% female health till 85 years old.
 survive2
 1-survive2
 
@@ -202,7 +202,7 @@ I use the linear model to predict the type of first incidence based on age and g
 
 ###Conclusions:
 
-64.4% Male, 77% Female survive till 85 years old.
+63.3% Male, 77.8% Female survive till 85 years old.
 
 Among the rest 35.6% male, 23% Female, average female survives longer than male without having angina or myocadial infarction.
 
