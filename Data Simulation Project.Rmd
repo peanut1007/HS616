@@ -1,0 +1,208 @@
+---
+title: "Data Simulation Demo"
+author: "Ellen Lin"
+date: "May 5, 2016"
+output: html_document
+---
+Tittle : SIMULATION MODEL OF FIRST INCIDENCE OF THE CORONARY HEART DISEASE
+
+Finding the pattern of first incidence of the coronary heart disease and people's gender and age.
+
+###Reference:
+
+The Development of a Simulation Model of the Treatment of Coronary Heart Disease, article posted on Health Care Management Science, on November 2002:
+<http://link.springer.com/article/10.1023%2FA%3A1020378022303>
+
+This article talks about how to simulate data and use data modeling to see the progress of patients who have had a coronary event, through their treatment pathways and subsequent coronary events. The main risk factors in the model are age, sex, history of previous events and the extent of the coronary vessel disease. The article is attached in this github folder.
+
+I'm inspired by this research and simulate my model to only investigate the relations of people have their first incidence of Stable Angina, Unstable Agina and Myocardinal Infarction. The data I use from this article is the % of age band per year for each new onset angina, unstable agina and myocardial inforction.
+
+###Background:
+Coronary heart disease is the leading cause of death and mor- bidity in most Western countries. Angina is a chest pain associated with the narrowing of the coronary arteries which is typically induced by exercise. A heart attack or myocardial infarction occurs if there is a complete blockage due to thrombosis (blood clotting) in a narrowed coronary artery; in some cases this leads to sudden death (cardiac arrest). 
+
+This article also referred to D.J. Lerner and W.B. Kannel, Patterns of coronary heart disease morbidity and mortality in the sexes: A 26-year follow-up of the Framingham population, American Heart Journal 111 (1986) 383– 390. And I also use the same probability from this previous study to simulate my data. Late I investigate two question I'm curious about: 
+
+* What percentage of people survive till age 85. 
+
+* Among the rest, occurrence rate of having first incidents of Stable Angina, Unstable Angina, or Myocardial infarction at each age.
+
+###Method to Simulate Model:
+Since it's a population based Discrete Event simulation model, I use Monte Carlo method to simulate the model, steps are the following:
+
+1.	Generate % of each incidence at each age band per year.
+
+2.	Age starts at 45, generate a random number from 0 to 1 at a time.
+
+3.	Each time when a random number is generated, compare it to each of the probability of incidence happening. The algorithm acts as generating a random number A compare to s, if greater than or equal to, which means the incidence s didn't happen, generating another random number B compare to u; finally, if not happen, generating another random number C compare to m. 
+
+4.	If none of the incidence happened, add another year. And going through step 3 again. Remember, when the age goes up, the probability of incidence changes at each age band.
+
+5.	In the end, either the variable – incidence type gets assigned, or the Age goes up to 85, then the loop stops.
+
+6. I generate 10000 samples for each male and female.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("reshape2")
+library("ggplot2")
+angina_simulation<-function(gender,age){
+  if (gender=='male') 
+    {s <- c(0.00238,0.00548,0.00655,0.00300)
+    u <- c(0.00043,0.0008,0.0019,0.0021)
+    m <- c(0.00225,0.00359,0.0071,0.0101)} else{
+      s <- c(0.00098,0.00357,0.00333,0.006)
+      u <- c(0.00029,0.00030,0.00039,0.00048)
+      m <- c(0.0003,0.00165,0.00236,0.0059)
+      }
+  event <- 0
+  
+  counter <-1
+  
+  
+  while(age<85 && event==0)
+  {
+    if (age<55) {counter <- 1} else if (age<65) {counter <- 2
+      }else if (age<75) {counter <- 3}else {counter <-4 }
+  
+      if (runif(1,0,1) < s[counter]) {event <- 1} else if (runif(1,0,1) < u[counter]) {event<-2
+      } else if (runif(1,0,1) < m[counter]) {event<-3}
+    
+    if (event==0) {age <- age+1}
+  }
+  
+  return (c(age,event))
+}
+
+set.seed(22)
+i=0
+
+a<- c(0,0)
+
+s_vector <-c()
+u_vector<-c()
+m_vector<-c()
+healthy_vector<-c()
+while(i<10000){
+  a<-angina_simulation('male',45)
+  if (a[2]==0) {healthy_vector <- c(healthy_vector,a[1])}
+  if (a[2]==1) {s_vector <- c(s_vector,a[1])}
+  if (a[2]==2) {u_vector <- c(u_vector,a[1])}
+  if (a[2]==3) {m_vector <- c(m_vector,a[1])}
+  i<- i+1
+}
+occurance1 <- list(s_vector,u_vector,m_vector)
+L1 <-melt(occurance1)
+all_male <- list(s_vector,u_vector,m_vector, healthy_vector)
+all1 <-melt(all_male)
+survive1 = length(healthy_vector)/10000
+#64.4% male health till 85 years old.
+survive1
+1-survive1
+
+
+
+i=0
+
+a<- c(0,0)
+
+s_vector <-c()
+u_vector<-c()
+m_vector<-c()
+healthy_vector<-c()
+while(i<10000){
+  a<-angina_simulation('female',45)
+  if (a[2]==0) {healthy_vector <- c(healthy_vector,a[1])}
+  if (a[2]==1) {s_vector <- c(s_vector,a[1])}
+  if (a[2]==2) {u_vector <- c(u_vector,a[1])}
+  if (a[2]==3) {m_vector <- c(m_vector,a[1])}
+  i<- i+1
+}
+occurance2 <- list(s_vector,u_vector,m_vector)
+L2 <-melt(occurance2)
+all_female <- list(s_vector,u_vector,m_vector, healthy_vector)
+all2 <-melt(all_female)
+survive2 = length(healthy_vector)/10000
+#77% female health till 85 years old.
+survive2
+1-survive2
+
+```
+
+
+### Plots and Data Visualization
+
+First two graphs present the patterns for the male, last two present the female:
+
+As people grow older, the probabiliy and numbers of incidence at each age goes higher.
+
+Both for male and female, especially obviously for female, since their initial probabiliy is much lower than male, the degree of the type of incidence goes higher as well, which means the sympton is more dangerous.
+
+```{r age vs type, echo=FALSE, warning=FALSE}
+
+#graph and data visualization 
+colnames(L1) <- c("age","incidence type")
+g <- ggplot(L1,aes(x=age, fill = as.factor(`incidence type`)))
+g+geom_histogram(binwidth=2, position="dodge")
+
+g+geom_density(position="dodge",alpha=0.5)
+
+#female
+colnames(L2) <- c("age","incidence type")
+g2 <- ggplot(L2,aes(x=age, fill = as.factor(`incidence type`)))
+g2+geom_histogram(binwidth=2, position="dodge")
+
+g2+geom_density(position="dodge",alpha=0.5)
+
+
+
+```
+
+Note that the `as.factor(incidence types)` indicates that 1 presents stable angina, 2 presents unstable angina, 3 presents the myocadial infarction.
+
+
+###Statistical Analysis: 
+
+Let's use **t test** to compare the means of two gender groups:
+
+```{r st}
+lapply(occurance1, shapiro.test)
+lapply(occurance2, shapiro.test)
+male <-lapply(occurance1, mean)
+female <- lapply(occurance2, mean)
+t.test(as.numeric(occurance1[[3]]),as.numeric(occurance2[[3]]))
+
+```
+The p value of the shapiro test says that the data is not normally distributed.
+
+The p value of the two sample t test is smaller than 0.05, so we can reject the null hypothesis that two genders have the same means. 
+
+Statistically our data show female survive longer than male without having any angina or myocardial infarction. 
+
+Last, I run the linear model to fit the data. Since it's a population based Discrete model, I don't think the `lm` function will give much information.
+```{r lm, echo=FALSE}
+colnames(all1) <- c("age","incidence type")
+
+colnames(all2) <- c("age","incidence type")
+all1$sex <- 1
+
+all2$sex <- 2
+
+df <- rbind.data.frame(all1,all2)
+
+#cor(df$age,df$`incidence type`)
+#cor(df$sex,df$`incidence type`)
+fit <- lm(`incidence type` ~ age+sex, data = df)
+summary(fit)
+
+```
+I use the linear model to predict the type of first incidence based on age and gender. The Adjusted R-squared equals to 0.55, somehow it's low. This means our model won't sufficiently predict the type of first incidence based on the age or gender. This is because the data I simulated is not use to predict but analyze the pattern.  
+
+###Conclusions:
+
+64.4% Male, 77% Female survive till 85 years old.
+
+Among the rest 35.6% male, 23% Female, average female survives longer than male without having angina or myocadial infarction.
+
